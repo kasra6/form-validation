@@ -1,0 +1,10 @@
+/* .alert{
+  padding: 20px;
+  background-color: #f563e9;
+  display: none;
+} */
+
+.alert{
+  display: block;
+  color: #f45f6f;
+}
