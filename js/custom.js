@@ -1,3 +1,31 @@
+// name Error function
+function nameError(){
+  const nameAlert = document.querySelector("span.name-alert");
+  nameAlert.textContent = "Please write your name";
+  nameInput.focus();
+}
+
+// lastname error function
+function lastnameError(){
+  const lastnameAlert = document.querySelector("span.lastname-alert");
+  lastnameAlert.textContent = "Please write your Last Name";
+  lastnameInput.focus();
+}
+
+// phone number error function
+function phonenumError(){
+  const phonenumAlert = document.querySelector("span.phonenum-alert");
+  phonenumAlert.textContent = "Please write your phone number";
+  phonenumInput.focus();
+};
+
+//email error function
+function emailError(){
+  const emailAlert = document.querySelector("span.email-alert");
+  emailAlert.textContent = "Please write your email address";
+  emailInput.focus();
+}
+
 
 //validate not empty inputs
 function validate(e){
@@ -5,46 +33,85 @@ function validate(e){
 
   // checking the input boxes to not be blank
   if (nameInput.value === ''){
-    const nameAlert = document.querySelector("span.name-alert");
-    nameAlert.textContent = "Please write your name";
-    nameInput.focus();
+    nameError();
   }
 
   if (lastnameInput.value === ''){
-    const lastnameAlert = document.querySelector("span.lastname-alert");
-    lastnameAlert.textContent = "Please write your Last Name";
-    lastnameInput.focus();
+    lastnameError();
   }
 
   if (phonenumInput.value === ''){
-    const phonenumAlert = document.querySelector("span.phonenum-alert");
-    phonenumAlert.textContent = "Please write your phone number";
-    phonenumInput.focus();
+    phonenumError();
   }
 
   if (emailInput.value === ''){
-    const emailAlert = document.querySelector("span.email-alert");
-    emailAlert.textContent = "Please write your email address";
-    emailInput.focus();
+    emailError();
     return false;
   }
 
   return true;
 }
 
+//validate name field
+function validateName(){
+  const userName = nameInput.value;
+  if (userName !== ''){
+
+    const regEx = new RegExp("^[A-Z ]*$", 'gi');
+    if (userName.match(regEx)){
+      const nameAlert = document.querySelector("span.name-alert");
+      nameAlert.textContent = "";
+    } else{
+      nameError();
+    }
+  }
+}
+
+
+//validate lastname field
+function validateLastname(){
+  const userLastname = lastnameInput.value;
+  if (userLastname !== ''){
+
+    const regEx = new RegExp("^[A-Z ]*$", 'gi');
+    if (userLastname.match(regEx)){
+      const lastnameAlert = document.querySelector("span.lastname-alert");
+      lastnameAlert.textContent = "";
+    } else{
+      lastnameError();
+    }
+  }
+}
+
+//validate phone number field
+function validatePhonenum(){
+  const userPhonenum = phonenumInput.value;
+  if (userPhonenum !== ''){
+
+    const regEx = new RegExp("^[0-9 ]*$", 'gi');
+    if (userPhonenum.match(regEx)){
+      const phonenumAlert = document.querySelector("span.lastname-alert");
+      phonenumAlert.textContent = "";
+    } else{
+      phonenumError();
+    }
+  }
+}
+
 //validate email address
 function validateEmail(){
   const userEmail = emailInput.value;
-  const atPos = userEmail.indexOf("@");
-  console.log(atPos);
-  const dotPos = userEmail.indexOf(".");
-  console.log(dotPos);
-  if (atPos < 1 || (dotPos - atPos < 2)){
-    const emailAlert = document.querySelector("span.email-alert");
-    emailAlert.textContent = "Please enter a valid email address";
-    return false;
+  if (userEmail !== ''){
+    const atPos = userEmail.indexOf("@");
+    const dotPos = userEmail.indexOf(".");
+    if (atPos < 1 || (dotPos - atPos < 2)){
+      emailError();
+    }
+    return true;
+  }else{
+    const emailAlert = document.querySelector("span.lastname-alert");
+    emailAlert.textContent = "";
   }
-  return true;
 }
 
 //getting form and form elements of the page
@@ -56,20 +123,10 @@ const emailInput = document.querySelector("input[name=email]");
 
 form.addEventListener('submit', validate);
 form.addEventListener('submit', validateEmail);
-
-// function validateName(evt){
-//   const regEx = new RegExp('^[a-z]', 'gi');
-//   if (this.value.match(regEx)) {
-//     if(alert.style.display === 'block'){
-//     const nameAlert = document.querySelector("span.name")}
-//     nameAlert.style.display = 'none'
-//   }else {
-//     alert.innerHTML += `<span class="name">Your name is invalid</span>`;
-//   }
-// }
-//
-// const name = document.querySelector("input[name=name]");
-//
-// const alert = document.querySelector(".alert");
-//
-// name.addEventListener('change', validateName);
+nameInput.addEventListener('keyup', validateName);
+nameInput.addEventListener('change', validateName);
+lastnameInput.addEventListener('keyup', validateLastname);
+lastnameInput.addEventListener('change', validateLastname);
+phonenumInput.addEventListener('keyup', validatePhonenum);
+phonenumInput.addEventListener('change', validatePhonenum);
+emailInput.addEventListener('change', validateEmail);
