@@ -19,7 +19,7 @@ function phonenumError(){
   phonenumInput.focus();
 };
 
-//email error function
+// email error function
 function emailError(){
   const emailAlert = document.querySelector("span.email-alert");
   emailAlert.textContent = "Please write your email address";
@@ -47,6 +47,8 @@ function validate(e){
   if (emailInput.value === ''){
     emailError();
     return false;
+  } else {
+    validateEmail();
   }
 
   return true;
@@ -90,7 +92,7 @@ function validatePhonenum(){
 
     const regEx = new RegExp("^[0-9 ]*$", 'gi');
     if (userPhonenum.match(regEx)){
-      const phonenumAlert = document.querySelector("span.lastname-alert");
+      const phonenumAlert = document.querySelector("span.phonenum-alert");
       phonenumAlert.textContent = "";
     } else{
       phonenumError();
@@ -100,6 +102,8 @@ function validatePhonenum(){
 
 //validate email address
 function validateEmail(){
+  const emailAlert = document.querySelector("span.email-alert");
+  emailAlert.textContent = "";
   const userEmail = emailInput.value;
   if (userEmail !== ''){
     const atPos = userEmail.indexOf("@");
@@ -122,7 +126,6 @@ const phonenumInput = document.querySelector("input[name=phone-num]");
 const emailInput = document.querySelector("input[name=email]");
 
 form.addEventListener('submit', validate);
-form.addEventListener('submit', validateEmail);
 nameInput.addEventListener('keyup', validateName);
 nameInput.addEventListener('change', validateName);
 lastnameInput.addEventListener('keyup', validateLastname);
